@@ -31,31 +31,32 @@
     </nav>
 
     <main id="grid" class="p-4 grid grid-cols-2 md:grid-cols-4 gap-4 pb-24 text-center">
-        <p class="col-span-full py-20 text-gray-400 italic">Connecting to Vault...</p>
+        <p class="col-span-full py-20 text-gray-400 italic">Syncing with Vault...</p>
     </main>
 
     <div id="opt-p" class="panel" onclick="closeP(event, 'opt-p')">
         <div class="panel-content text-center pb-14">
-            <h3 class="font-black text-2xl mb-8 italic text-slate-800">Follow Us</h3>
-            <div class="grid grid-cols-2 gap-4">
-                <a id="ig" href="#" target="_blank" class="p-6 bg-gradient-to-tr from-purple-600 to-pink-500 text-white rounded-[30px] font-black shadow-lg active:scale-95 transition">Instagram</a>
-                <a id="tk" href="#" target="_blank" class="p-6 bg-black text-white rounded-[30px] font-black shadow-lg active:scale-95 transition">TikTok</a>
+            <h3 class="font-black text-2xl mb-8 italic">Vault Socials</h3>
+            <div class="flex flex-col gap-4">
+                <a id="ig" href="#" target="_blank" class="p-5 bg-gradient-to-r from-purple-600 to-pink-500 text-white rounded-2xl font-black shadow-lg">Instagram</a>
+                <a id="tk" href="#" target="_blank" class="p-5 bg-black text-white rounded-2xl font-black shadow-lg">TikTok</a>
+                <a id="wa-link" href="#" target="_blank" class="p-5 bg-green-500 text-white rounded-2xl font-black shadow-lg">WhatsApp Us</a>
             </div>
         </div>
     </div>
 
     <div id="cart-p" class="panel" onclick="closeP(event, 'cart-p')">
         <div class="panel-content space-y-5">
-            <h2 class="text-3xl font-black mb-2">My Bag</h2>
-            <div id="items" class="space-y-3"></div>
+            <h2 class="text-3xl font-black">My Bag</h2>
+            <div id="items" class="space-y-2"></div>
             
-            <div class="space-y-3 pt-2">
-                <div class="grid grid-cols-2 gap-3">
+            <div class="space-y-3">
+                <div class="grid grid-cols-2 gap-2">
                     <input id="city" placeholder="City" class="p-4 bg-gray-100 rounded-2xl outline-none">
                     <input id="dist" placeholder="District" class="p-4 bg-gray-100 rounded-2xl outline-none">
                 </div>
-                <input id="bld" placeholder="Building/Floor/Apt" class="w-full p-4 bg-gray-100 rounded-2xl outline-none">
-                <input id="ph" type="tel" placeholder="WhatsApp Number" class="w-full p-4 bg-gray-100 rounded-2xl outline-none">
+                <input id="bld" placeholder="Building / Floor / Apartment" class="w-full p-4 bg-gray-100 rounded-2xl outline-none">
+                <input id="ph" type="tel" placeholder="WhatsApp Phone Number" class="w-full p-4 bg-gray-100 rounded-2xl outline-none">
                 <select id="pay" class="w-full p-4 bg-gray-100 rounded-2xl font-bold appearance-none">
                     <option value="Cash on Delivery">Cash on Delivery</option>
                     <option value="Whish Pay">Whish Pay</option>
@@ -63,7 +64,7 @@
             </div>
 
             <div class="p-6 bg-slate-900 text-white rounded-[32px] flex justify-between items-center shadow-2xl">
-                <span class="font-bold text-gray-400 text-xs tracking-widest uppercase">Total Bill</span>
+                <span class="font-bold text-gray-400 text-xs uppercase">Total + Fee</span>
                 <span id="total" class="font-black text-2xl">$0</span>
             </div>
             
@@ -74,27 +75,28 @@
     <div id="adm-p" class="panel">
         <div class="panel-content">
             <div class="flex justify-between items-center mb-8">
-                <h2 class="text-2xl font-black text-red-600 uppercase italic">Admin Mode</h2>
+                <h2 class="text-2xl font-black text-red-600 uppercase italic">Admin Console</h2>
                 <button onclick="toggle('adm-p')" class="bg-gray-100 px-4 py-2 rounded-full font-bold text-xs">CLOSE</button>
             </div>
             
             <div class="space-y-4 border-b pb-8 mb-8">
-                <p class="font-black text-xs uppercase text-gray-400 tracking-widest">Add Inventory</p>
+                <p class="font-black text-xs text-gray-400 uppercase tracking-widest">Inventory Management</p>
                 <input id="n-name" placeholder="Shoe Name" class="w-full border p-4 rounded-2xl outline-none">
                 <input id="n-price" type="number" placeholder="Price ($)" class="w-full border p-4 rounded-2xl outline-none">
-                <input id="n-img" placeholder="Image URL (Pinterest/Direct)" class="w-full border p-4 rounded-2xl outline-none">
-                <button onclick="addProd()" class="w-full bg-green-500 text-white p-4 rounded-2xl font-bold shadow-lg active:scale-95 transition">Publish Shoe</button>
+                <input id="n-img" placeholder="Image URL" class="w-full border p-4 rounded-2xl outline-none">
+                <button onclick="addProd()" class="w-full bg-green-500 text-white p-4 rounded-2xl font-bold shadow-lg">Add Product</button>
             </div>
 
             <div class="space-y-4 border-b pb-8 mb-8">
-                <p class="font-black text-xs uppercase text-gray-400 tracking-widest">Store Settings</p>
+                <p class="font-black text-xs text-gray-400 uppercase tracking-widest">Store Configuration</p>
                 <input id="a-fee" placeholder="Delivery Fee ($)" class="border p-4 rounded-2xl w-full outline-none">
                 <input id="a-ig" placeholder="Instagram URL" class="border p-4 rounded-2xl w-full outline-none">
                 <input id="a-tk" placeholder="TikTok URL" class="border p-4 rounded-2xl w-full outline-none">
-                <button onclick="saveSet()" class="w-full bg-black text-white p-4 rounded-2xl font-bold active:scale-95 transition">Save Config</button>
+                <input id="a-wa" placeholder="Your WhatsApp (961...)" class="border p-4 rounded-2xl w-full outline-none">
+                <button onclick="saveSet()" class="w-full bg-black text-white p-4 rounded-2xl font-bold">Update Store</button>
             </div>
 
-            <h3 class="font-black text-xl mb-4 italic">Customer Orders</h3>
+            <h3 class="font-black text-xl mb-4 italic text-slate-800">Order Logs</h3>
             <div id="log" class="space-y-4 pb-20"></div>
         </div>
     </div>
@@ -116,33 +118,33 @@
         const app = initializeApp(firebaseConfig);
         const db = getDatabase(app);
 
-        window.shoes = []; window.orders = []; window.cfg = {fee:5, ig:'#', tk:'#'}; let cart = [];
+        window.shoes = []; window.orders = []; window.cfg = {fee:5, ig:'#', tk:'#', wa:'96170123456'}; let cart = [];
 
         onValue(ref(db, 'shoes'), (snap) => { window.shoes = snap.val() ? Object.values(snap.val()) : []; drawProducts(); });
         onValue(ref(db, 'orders'), (snap) => { window.orders = snap.val() ? Object.values(snap.val()).reverse() : []; drawLog(); });
-        onValue(ref(db, 'config'), (snap) => { if(snap.val()) window.cfg = snap.val(); drawProducts(); });
+        onValue(ref(db, 'config'), (snap) => { if(snap.val()) window.cfg = snap.val(); updateUI(); });
+
+        function updateUI() {
+            document.getElementById('ig').href = window.cfg.ig;
+            document.getElementById('tk').href = window.cfg.tk;
+            document.getElementById('wa-link').href = `https://wa.me/${window.cfg.wa}`;
+            drawProducts();
+        }
 
         function drawProducts() {
             const grid = document.getElementById('grid');
-            if(window.shoes.length === 0) {
-                grid.innerHTML = '<p class="col-span-full py-20 text-gray-400 italic">No inventory found.</p>';
-            } else {
-                grid.innerHTML = window.shoes.map(s => `
-                    <div class="ios-card p-3 shadow-sm border border-gray-50">
-                        <img src="${s.img}" class="w-full h-40 object-cover rounded-[25px] mb-3 bg-gray-50">
-                        <p class="text-[12px] font-bold text-slate-800 truncate px-1">${s.name}</p>
-                        <p class="text-blue-600 font-black text-base px-1 mb-3">$${s.price}</p>
-                        <button onclick="add(${s.id})" class="mt-auto bg-slate-100 py-3 rounded-2xl text-[10px] font-black uppercase tracking-widest active:bg-slate-200 transition">Add to Bag</button>
-                        ${document.getElementById('adm-p').classList.contains('active') ? `<button onclick="delShoe(${s.id})" class="text-[9px] text-red-500 mt-3 font-bold uppercase underline">Remove Item</button>` : ''}
-                    </div>
-                `).join('');
-            }
-            // FIXED: Social links now update live
-            document.getElementById('ig').href = window.cfg.ig;
-            document.getElementById('tk').href = window.cfg.tk;
+            grid.innerHTML = window.shoes.length ? window.shoes.map(s => `
+                <div class="ios-card p-3 shadow-sm border border-gray-50">
+                    <img src="${s.img}" class="w-full h-40 object-cover rounded-[25px] mb-3 bg-gray-50">
+                    <p class="text-[12px] font-bold text-slate-800 truncate px-1">${s.name}</p>
+                    <p class="text-blue-600 font-black text-base px-1 mb-3">$${s.price}</p>
+                    <button onclick="addToBag(${s.id})" class="mt-auto bg-slate-100 py-3 rounded-2xl text-[10px] font-black uppercase tracking-widest active:bg-slate-200 transition">Add to Bag</button>
+                    ${document.getElementById('adm-p').classList.contains('active') ? `<button onclick="delShoe(${s.id})" class="text-[9px] text-red-500 mt-3 font-bold uppercase underline">Delete</button>` : ''}
+                </div>
+            `).join('') : '<p class="col-span-full py-20 text-gray-400">Store is empty.</p>';
         }
 
-        window.add = (id) => {
+        window.addToBag = (id) => {
             let s = window.shoes.find(x => x.id === id);
             let ex = cart.find(x => x.id === id);
             ex ? ex.q++ : cart.push({...s, q:1});
@@ -151,7 +153,7 @@
 
         function updateCart() {
             document.getElementById('count').innerText = cart.reduce((a,b)=>a+b.q,0);
-            let sub = cart.reduce((a,b)=>a+(b.price*b.q),0);
+            let sub = cart.reduce((a,b)=>a+(Number(b.price)*b.q),0);
             document.getElementById('total').innerText = `$${sub + Number(window.cfg.fee)}`;
             document.getElementById('items').innerHTML = cart.map(i => `<div class="p-4 bg-gray-50 rounded-2xl font-bold text-sm flex justify-between"><span>${i.name}</span><span>${i.q}x</span></div>`).join('');
         }
@@ -160,34 +162,40 @@
             let ph = document.getElementById('ph').value;
             let method = document.getElementById('pay').value;
             let totalVal = document.getElementById('total').innerText;
-            if(!ph || cart.length === 0) return alert("Missing info!");
+            if(!ph || cart.length === 0) return alert("Please fill cart and phone!");
             
             let tid = "ORD-" + Math.floor(Math.random()*8999+1000);
-            let order = { id: tid, ph, pay: method, total: totalVal, loc: `${document.getElementById('city').value}, ${document.getElementById('dist').value}`, items: cart.map(i=>`${i.q}x ${i.name}`).join(', '), time: new Date().toLocaleString() };
+            let order = { 
+                id: tid, ph, pay: method, total: totalVal, 
+                loc: `${document.getElementById('city').value}, ${document.getElementById('dist').value}`,
+                bld: document.getElementById('bld').value,
+                items: cart.map(i=>`${i.q}x ${i.name}`).join(', '), 
+                time: new Date().toLocaleString() 
+            };
 
             set(push(ref(db, 'orders')), order).then(() => {
                 if (method === "Whish Pay") {
-                    window.location.href = `whish.html?id=${tid}&total=${totalVal}`;
+                    let msg = `Whish Pay Receipt for ${tid}%0ATotal: ${totalVal}%0AItems: ${order.items}`;
+                    window.location.href = `https://wa.me/${window.cfg.wa}?text=${msg}`;
                 } else {
-                    alert("Order Placed!"); cart = []; updateCart(); toggle('cart-p');
+                    alert("Order Confirmed! We will call you."); 
+                    cart = []; updateCart(); toggle('cart-p');
                 }
             });
         };
 
-        window.toggle = (id) => {
-            document.getElementById(id).classList.toggle('active');
-            if(id === 'adm-p') drawProducts();
-        };
+        window.toggle = (id) => { document.getElementById(id).classList.toggle('active'); if(id === 'adm-p') drawProducts(); };
         window.closeP = (e, id) => { if(e.target.id === id) toggle(id); };
 
         let keys = {};
         window.onkeydown = (e) => {
             keys[e.key] = true;
             if(keys['Shift'] && keys['G'] && keys['H']) {
-                if(prompt("Vault Key:") === "admin123") {
+                if(prompt("Admin Key:") === "admin123") {
                     document.getElementById('a-fee').value = window.cfg.fee;
                     document.getElementById('a-ig').value = window.cfg.ig;
                     document.getElementById('a-tk').value = window.cfg.tk;
+                    document.getElementById('a-wa').value = window.cfg.wa;
                     toggle('adm-p');
                 }
                 keys = {};
@@ -200,13 +208,18 @@
             let p = document.getElementById('n-price').value;
             let i = document.getElementById('n-img').value;
             let id = Date.now();
-            set(ref(db, 'shoes/' + id), { id, name: n, price: p, img: i }).then(() => alert("Product Added!"));
+            set(ref(db, 'shoes/' + id), { id, name: n, price: p, img: i }).then(() => alert("Product Live!"));
         };
 
-        window.delShoe = (id) => { if(confirm("Delete from store?")) remove(ref(db, 'shoes/' + id)); };
+        window.delShoe = (id) => { if(confirm("Permanently delete?")) remove(ref(db, 'shoes/' + id)); };
         
         window.saveSet = () => {
-            set(ref(db, 'config'), { fee: document.getElementById('a-fee').value, ig: document.getElementById('a-ig').value, tk: document.getElementById('a-tk').value }).then(() => alert("Config Saved!"));
+            set(ref(db, 'config'), { 
+                fee: document.getElementById('a-fee').value, 
+                ig: document.getElementById('a-ig').value, 
+                tk: document.getElementById('a-tk').value,
+                wa: document.getElementById('a-wa').value
+            }).then(() => alert("Store Config Updated!"));
         };
 
         window.drawLog = () => {
@@ -215,10 +228,12 @@
                     <div class="flex justify-between font-black text-sm"><span>#${o.id}</span><span class="text-blue-600">${o.total}</span></div>
                     <div class="details text-[11px] mt-4 border-t pt-4 space-y-2">
                         <p>👟 <b>Cart:</b> ${o.items}</p>
-                        <p>📍 <b>Location:</b> ${o.loc}</p>
-                        <p>📞 <b>Customer:</b> ${o.ph}</p>
-                        <p>💳 <b>Method:</b> ${o.pay}</p>
-                        <a href="https://wa.me/961${o.ph}" target="_blank" class="inline-block mt-3 bg-green-500 text-white px-5 py-2 rounded-full font-black uppercase text-[9px]">WhatsApp Chat</a>
+                        <p>📞 <b>Phone:</b> ${o.ph}</p>
+                        <p>📍 <b>Area:</b> ${o.loc}</p>
+                        <p>🏢 <b>Address:</b> ${o.bld}</p>
+                        <p>💳 <b>Payment:</b> ${o.pay}</p>
+                        <p>⏰ <b>Time:</b> ${o.time}</p>
+                        <a href="https://wa.me/${o.ph.startsWith('961') ? o.ph : '961'+o.ph}" target="_blank" class="inline-block mt-3 bg-green-500 text-white px-5 py-2 rounded-full font-black uppercase text-[9px]">WhatsApp Chat</a>
                     </div>
                 </div>
             `).join('');
