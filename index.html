@@ -191,25 +191,40 @@
             updateCart();
         };
 
-        window.checkout = () => {
-            let ph = document.getElementById('ph').value;
-            if(!ph || cart.length === 0) return alert("Missing items or Phone number!");
-            let tid = "ORD-"+Math.floor(Math.random()*8999+1000);
-            let order = {
-                id: tid, ph, 
-                loc: `${document.getElementById('city').value}, ${document.getElementById('dist').value}`,
-                bld: document.getElementById('bld').value,
-                pay: document.getElementById('pay').value,
-                total: document.getElementById('total').innerText,
-                items: cart.map(i=>`${i.q}x ${i.name}`).join(', '),
-                time: new Date().toLocaleString()
-            };
-            set(push(ref(db, 'orders')), order).then(() => {
-                alert("Order Sent to Vault!"); 
-                cart=[]; updateCart(); toggle('cart-p');
-            });
-        };
+    window.checkout = () => {
+    let ph = document.getElementById('ph').value;
+    let paymentMethod = document.getElementById('pay').value;
+    
+    if(!ph || cart.length === 0) return alert("Missing items or Phone number!");
+    
+    let tid = "ORD-"+Math.floor(Math.random()*8999+1000);
+    let order = {
+        id: tid, 
+        ph, 
+        loc: `${document.getElementById('city').value}, ${document.getElementById('dist').value}`,
+        bld: document.getElementById('bld').value,
+        pay: paymentMethod,
+        total: document.getElementById('total').innerText,
+        items: cart.map(i=>`${i.q}x ${i.name}`).join(', '),
+        time: new Date().toLocaleString()
+    };
 
+    // 1. Save to Firebase (So YOU see it in Admin)
+    set(push(ref(db, 'orders')), order).then(() => {
+        alert("Order Received!");
+
+        // 2. CHECK: If it's Whish Pay, go to the receipt page
+        if (paymentMethod === "Whish Pay") {
+            // This sends them to whish.html and passes the Order ID and Total in the link
+            window.location.href = `whish.html?id=${tid}&total=${order.total}`;
+        } else {
+            // If it's Cash, just clear the cart and stay home
+            cart = []; 
+            updateCart(); 
+            toggle('cart-p');
+        }
+    });
+};
         // ADMIN ACCESS: Hold Shift + G + H
         let keys = {};
         window.onkeydown = (e) => {
