@@ -3,23 +3,24 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>Sneaky Sneaks | Official</title>
+    <title>Sneaky Sneaks | Official 2026</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     <style>
         body { background: #ffffff; font-family: -apple-system, BlinkMacSystemFont, sans-serif; overflow-x: hidden; }
-        .glass { background: rgba(255, 255, 255, 0.85); backdrop-filter: blur(20px); -webkit-backdrop-filter: blur(20px); border-bottom: 1px solid rgba(0,0,0,0.05); }
-        .hero { height: 60vh; background: url('https://images.unsplash.com/photo-1552346154-21d32810aba3?q=80&w=2070&auto=format&fit=crop') center/cover; display: flex; align-items: center; justify-content: center; color: white; }
+        .glass { background: rgba(255,255,255,0.85); backdrop-filter: blur(20px); -webkit-backdrop-filter: blur(20px); border-bottom: 1px solid rgba(0,0,0,0.05); }
+        .hero { height: 55vh; background: url('https://images.unsplash.com/photo-1552346154-21d32810aba3?q=80&w=2070&auto=format&fit=crop') center/cover; display: flex; align-items: center; justify-content: center; color: white; }
         .horizontal-scroll { display: flex; overflow-x: auto; gap: 15px; padding: 10px 20px; scrollbar-width: none; }
         .horizontal-scroll::-webkit-scrollbar { display: none; }
         .product-card { min-width: 170px; flex: 0 0 auto; position: relative; }
         .panel { position: fixed; inset: 0; z-index: 100; display: none; align-items: flex-end; background: rgba(0,0,0,0.4); }
         .panel.active { display: flex; }
-        .panel-content { width: 100%; background: white; border-radius: 30px 30px 0 0; padding: 25px; max-height: 90vh; overflow-y: auto; }
+        .panel-content { width: 100%; background: white; border-radius: 30px 30px 0 0; padding: 25px; max-height: 94vh; overflow-y: auto; }
         .status-badge { position: absolute; top: 8px; right: 8px; padding: 4px 8px; border-radius: 8px; font-size: 8px; font-weight: 900; text-transform: uppercase; z-index: 5; }
         .item-disabled { opacity: 0.4; filter: grayscale(1); pointer-events: none; }
-        #view-all-overlay { display: none; z-index: 80; position: fixed; inset: 0; background: white; overflow-y: auto; padding-top: 80px; }
+        #view-all-overlay { display: none; z-index: 80; position: fixed; inset: 0; background: white; overflow-y: auto; padding-top: 70px; }
         #view-all-overlay.active { display: block; }
+        .size-btn.active { background: black; color: white; border-color: black; }
         .details { display: none; }
         .expanded .details { display: block; }
     </style>
@@ -40,6 +41,10 @@
         </div>
     </nav>
 
+    <div id="detail-p" class="panel" onclick="closeP(event, 'detail-p')">
+        <div class="panel-content" id="detail-ui"></div>
+    </div>
+
     <div id="view-all-overlay">
         <div class="p-6 flex justify-between items-center border-b">
             <h2 id="view-all-title" class="text-2xl font-black italic uppercase">Category</h2>
@@ -50,20 +55,17 @@
 
     <div id="search-p" class="panel" onclick="closeP(event, 'search-p')">
         <div class="panel-content" style="height: 85vh;">
-            <div class="flex justify-between items-center mb-4">
-                <h2 class="font-black uppercase italic">Search Store</h2>
-                <button onclick="toggle('search-p')"><i class="fa-solid fa-xmark"></i></button>
-            </div>
             <input type="text" id="search-in" oninput="runSearch()" placeholder="Search shoes, clothes..." class="w-full p-4 bg-gray-100 rounded-2xl outline-none mb-6">
-            <div id="search-results" class="grid grid-cols-2 gap-4 pb-10"></div>
+            <div id="search-results" class="grid grid-cols-2 gap-4 pb-12"></div>
         </div>
     </div>
 
     <div id="main-store-ui">
         <section class="hero">
-            <div class="bg-black/30 w-full h-full flex flex-col items-center justify-center p-6 text-center">
-                <h1 class="text-5xl font-black italic uppercase mb-2">Sneaky Sneaks</h1>
-                <button onclick="document.getElementById('shop-start').scrollIntoView({behavior:'smooth'})" class="bg-white text-black px-10 py-3 rounded-full font-black uppercase text-xs">Explore</button>
+            <div class="bg-black/20 w-full h-full flex flex-col items-center justify-center text-center">
+                <h1 class="text-5xl font-black italic uppercase tracking-tighter">Sneaky Sneaks</h1>
+                <p class="font-bold text-[10px] tracking-[0.3em] mt-2 mb-6">LEBANON EXCLUSIVE</p>
+                <button onclick="document.getElementById('shop-start').scrollIntoView({behavior:'smooth'})" class="bg-white text-black px-12 py-3 rounded-full font-black uppercase text-xs">Shop</button>
             </div>
         </section>
 
@@ -83,63 +85,62 @@
             <div class="space-y-4">
                 <a id="side-ig" href="#" target="_blank" class="flex items-center gap-3 font-bold"><i class="fa-brands fa-instagram text-xl"></i> Instagram</a>
                 <a id="side-tk" href="#" target="_blank" class="flex items-center gap-3 font-bold"><i class="fa-brands fa-tiktok text-xl"></i> TikTok</a>
-                <a id="side-wa" href="#" target="_blank" class="flex items-center gap-3 font-bold text-green-600"><i class="fa-brands fa-whatsapp text-xl"></i> Contact Support</a>
+                <a id="side-wa" href="#" target="_blank" class="flex items-center gap-3 font-bold text-green-600"><i class="fa-brands fa-whatsapp text-xl"></i> WhatsApp</a>
             </div>
         </div>
     </div>
 
     <div id="cart-p" class="panel" onclick="closeP(event, 'cart-p')">
         <div class="panel-content space-y-4">
-            <h2 class="text-2xl font-black uppercase italic">Your Bag</h2>
+            <h2 class="text-2xl font-black uppercase italic">Bag</h2>
             <div id="cart-items" class="space-y-2"></div>
-            <div class="bg-gray-100 p-4 rounded-3xl space-y-2">
+            <div class="bg-gray-50 p-4 rounded-3xl space-y-2">
                 <div class="grid grid-cols-2 gap-2">
                     <input id="city" placeholder="City" class="p-3 bg-white rounded-xl outline-none text-sm">
                     <input id="dist" placeholder="District" class="p-3 bg-white rounded-xl outline-none text-sm">
                 </div>
-                <input id="bld" placeholder="Building / Floor / Apt" class="w-full p-3 bg-white rounded-xl outline-none text-sm">
+                <input id="bld" placeholder="Building/Floor/Apt" class="w-full p-3 bg-white rounded-xl outline-none text-sm">
                 <input id="ph" type="tel" placeholder="WhatsApp Number" class="w-full p-3 bg-white rounded-xl outline-none text-sm">
-                <select id="pay" class="w-full p-3 bg-white rounded-xl font-bold border-0">
+                <select id="pay" class="w-full p-3 bg-white rounded-xl font-bold">
                     <option value="Cash">💵 Cash on Delivery</option>
                     <option value="Whish">📲 Whish Pay</option>
                 </select>
             </div>
             <div class="flex justify-between font-black text-xl px-2"><span>Total:</span><span id="total-val">$0</span></div>
-            <button onclick="checkout()" class="w-full bg-blue-600 text-white p-4 rounded-2xl font-black uppercase">Place Order</button>
+            <button onclick="checkout()" class="w-full bg-blue-600 text-white p-4 rounded-2xl font-black uppercase shadow-lg">Confirm Order</button>
         </div>
     </div>
 
     <div id="adm-p" class="panel">
         <div class="panel-content">
-            <div class="flex justify-between items-center mb-6">
-                <h2 class="text-xl font-black text-red-600 italic uppercase">🔒 Admin Vault</h2>
-                <button onclick="toggle('adm-p')" class="text-xs font-bold">CLOSE</button>
+            <div class="flex justify-between items-center mb-6 border-b pb-4">
+                <h2 class="text-xl font-black text-red-600 italic uppercase">🔒 Admin Control</h2>
+                <button onclick="toggle('adm-p')" class="text-[10px] font-black underline">CLOSE</button>
             </div>
             <div class="grid grid-cols-2 gap-2 mb-6">
-                <input id="cfg-wa" placeholder="WA Number" class="p-2 border rounded-lg text-xs">
-                <input id="cfg-fee" placeholder="Delivery Fee" class="p-2 border rounded-lg text-xs">
-                <input id="cfg-ig" placeholder="IG Link" class="p-2 border rounded-lg text-xs w-full col-span-2">
-                <input id="cfg-tk" placeholder="TK Link" class="p-2 border rounded-lg text-xs w-full col-span-2">
-                <button onclick="saveCfg()" class="col-span-2 bg-black text-white p-2 rounded-lg text-[10px] font-bold">SAVE CONFIG</button>
+                <input id="cfg-wa" placeholder="WhatsApp" class="p-2 border rounded-lg text-xs">
+                <input id="cfg-fee" placeholder="Shipping Fee" class="p-2 border rounded-lg text-xs">
+                <input id="cfg-ig" placeholder="Instagram URL" class="p-2 border rounded-lg text-xs col-span-2">
+                <input id="cfg-tk" placeholder="TikTok URL" class="p-2 border rounded-lg text-xs col-span-2">
+                <button onclick="saveCfg()" class="col-span-2 bg-black text-white p-2 rounded-lg text-[10px] font-bold uppercase">Update Config</button>
             </div>
-            <div class="space-y-2 border-b pb-6 mb-6">
-                <input id="n-name" placeholder="Product Name" class="w-full p-3 bg-gray-100 rounded-xl">
+            <div class="space-y-2 border-b pb-6 mb-6 bg-gray-50 p-4 rounded-2xl">
+                <input id="n-name" placeholder="Item Name" class="w-full p-3 rounded-xl border">
                 <div class="grid grid-cols-2 gap-2">
-                    <input id="n-price" type="number" placeholder="Price $" class="p-3 bg-gray-100 rounded-xl">
-                    <select id="n-gen" class="p-3 bg-gray-100 rounded-xl font-bold"><option value="men">Men</option><option value="women">Women</option></select>
+                    <input id="n-price" type="number" placeholder="Price $" class="p-3 rounded-xl border">
+                    <select id="n-gen" class="p-3 rounded-xl border font-bold"><option value="men">Men</option><option value="women">Women</option></select>
                 </div>
-                <select id="n-cat" class="w-full p-3 bg-gray-100 rounded-xl font-bold">
+                <select id="n-cat" class="w-full p-3 rounded-xl border font-bold">
                     <option value="shoes">Shoes</option><option value="clothes">Clothing</option><option value="pants">Pants</option><option value="access">Accessories</option><option value="perfume">Perfumes</option>
                 </select>
-                <input id="n-img" placeholder="Image URL" class="w-full p-3 bg-gray-100 rounded-xl">
-                <button onclick="addProd()" class="w-full bg-green-600 text-white p-3 rounded-xl font-black uppercase">Publish</button>
+                <input id="n-img" placeholder="Image URL" class="w-full p-3 rounded-xl border">
+                <input id="n-sizes" placeholder="Sizes (e.g. 38,39,40)" class="w-full p-3 rounded-xl border">
+                <button onclick="addProd()" class="w-full bg-green-600 text-white p-3 rounded-xl font-black uppercase">Publish Item</button>
             </div>
-            <div id="admin-inventory" class="space-y-2 mb-8 h-40 overflow-y-auto border-b"></div>
-            <div class="mt-4">
-                <h3 class="font-black italic uppercase mb-2">Order Search</h3>
-                <input id="log-search" oninput="runLogSearch()" placeholder="Search ID, Phone or City..." class="w-full p-3 bg-gray-100 rounded-xl mb-4 border-2 border-blue-200">
-                <div id="log" class="space-y-3 pb-20"></div>
-            </div>
+            <div id="admin-inventory" class="h-40 overflow-y-auto mb-4 border-b"></div>
+            <h3 class="font-black italic uppercase mb-2">Order Log</h3>
+            <input id="log-search" oninput="runLogSearch()" placeholder="Search ID, Phone or City..." class="w-full p-3 bg-gray-100 rounded-xl mb-4 text-xs">
+            <div id="log" class="space-y-3 pb-20"></div>
         </div>
     </div>
 
@@ -161,6 +162,7 @@
         const db = getDatabase(app);
 
         let products = []; let orders = []; let cfg = {wa:'961', fee:0, ig:'#', tk:'#'}; let curGen = 'men'; let cart = [];
+        let tempP = null; let selSize = null; let selQ = 1;
         const cats = { shoes: "Shoes", clothes: "Clothing", pants: "Pants", access: "Accessories", perfume: "Perfumes" };
 
         onValue(ref(db, 'sneaks_items'), (snap) => {
@@ -175,9 +177,7 @@
 
         function updateGlobalLinks() {
             const waUrl = `https://api.whatsapp.com/send?phone=${cfg.wa.replace(/\D/g, '')}`;
-            document.getElementById('side-ig').href = cfg.ig;
-            document.getElementById('side-tk').href = cfg.tk;
-            document.getElementById('side-wa').href = waUrl;
+            document.getElementById('side-ig').href = cfg.ig; document.getElementById('side-tk').href = cfg.tk; document.getElementById('side-wa').href = waUrl;
         }
 
         window.setGender = (g) => {
@@ -206,23 +206,57 @@
             document.getElementById('view-all-grid').innerHTML = items.map(p => drawCard(p)).join('');
             document.getElementById('view-all-overlay').classList.add('active');
             document.getElementById('main-store-ui').style.display = 'none';
-            window.scrollTo(0,0);
         };
 
         window.closeViewAll = () => { document.getElementById('view-all-overlay').classList.remove('active'); document.getElementById('main-store-ui').style.display = 'block'; };
 
         function drawCard(p) {
-            const status = p.status || 'available';
-            let badge = '', style = '', btnText = 'Add to Bag';
-            if(status === 'soldout') { badge = '<span class="status-badge bg-red-600 text-white">Sold Out</span>'; style='item-disabled'; btnText='Sold Out'; }
-            if(status === 'soon') { badge = '<span class="status-badge bg-blue-600 text-white">Soon</span>'; style='item-disabled'; btnText='Soon'; }
-            return `<div class="product-card ${style}">${badge}<img src="${p.img}" class="w-full h-48 object-cover rounded-[25px] mb-2 bg-gray-50 shadow-sm"><p class="font-bold text-[11px] truncate px-1">${p.name}</p><p class="text-blue-600 font-black text-sm px-1 mb-2">$${p.price}</p><button onclick="addCart('${p.fbKey}')" class="w-full bg-slate-900 text-white py-3 rounded-2xl text-[9px] font-black uppercase tracking-widest">${btnText}</button></div>`;
+            const s = p.status || 'available';
+            let badge = '', style = '', bTxt = 'Add to Bag';
+            if(s === 'soldout') { badge = '<span class="status-badge bg-red-600 text-white">Sold Out</span>'; style='item-disabled'; bTxt='Sold Out'; }
+            if(s === 'soon') { badge = '<span class="status-badge bg-blue-600 text-white">Soon</span>'; style='item-disabled'; bTxt='Soon'; }
+            return `<div class="product-card ${style}">${badge}<img src="${p.img}" class="w-full h-48 object-cover rounded-[25px] mb-2 bg-gray-50 shadow-sm"><p class="font-bold text-[11px] truncate px-1">${p.name}</p><p class="text-blue-600 font-black text-sm px-1 mb-2">$${p.price}</p><button onclick="openProduct('${p.fbKey}')" class="w-full bg-slate-900 text-white py-3 rounded-2xl text-[9px] font-black uppercase tracking-widest">${bTxt}</button></div>`;
         }
 
+        window.openProduct = (key) => {
+            const p = products.find(x => x.fbKey === key);
+            tempP = p; selSize = null; selQ = 1;
+            const sizeList = p.sizes ? p.sizes.split(',') : ['36','37','38','39','40','41','42','43','44','45'];
+            document.getElementById('detail-ui').innerHTML = `
+                <img src="${p.img}" class="w-full h-72 object-cover rounded-3xl mb-4">
+                <h2 class="text-2xl font-black uppercase italic">${p.name}</h2>
+                <p class="text-blue-600 font-black text-xl mb-6">$${p.price}</p>
+                <p class="text-[10px] font-black uppercase text-gray-400 mb-2">Available Sizes</p>
+                <div class="flex flex-wrap gap-2 mb-6">
+                    ${sizeList.map(s => `<button onclick="setS(this, '${s}')" class="size-btn border-2 border-gray-100 rounded-xl px-4 py-2 text-xs font-black">${s}</button>`).join('')}
+                </div>
+                <div class="flex items-center justify-between bg-gray-50 p-4 rounded-2xl mb-6">
+                    <span class="font-bold text-xs uppercase">Quantity</span>
+                    <div class="flex items-center gap-6">
+                        <button onclick="chQ(-1)" class="text-xl font-black">-</button>
+                        <span id="q-val" class="font-black">1</span>
+                        <button onclick="chQ(1)" class="text-xl font-black">+</button>
+                    </div>
+                </div>
+                <button onclick="confirmToBag()" id="add-btn" class="w-full bg-black text-white p-5 rounded-2xl font-black uppercase">Add to Bag • $${p.price}</button>
+            `;
+            toggle('detail-p');
+        };
+
+        window.setS = (btn, s) => { document.querySelectorAll('.size-btn').forEach(b => b.classList.remove('active')); btn.classList.add('active'); selSize = s; };
+        window.chQ = (v) => { if(selQ + v < 1) return; selQ += v; document.getElementById('q-val').innerText = selQ; document.getElementById('add-btn').innerText = `Add to Bag • $${tempP.price * selQ}`; };
+
+        window.confirmToBag = () => {
+            if(!selSize) return alert("Select a size!");
+            const ex = cart.find(x => x.fbKey === tempP.fbKey && x.size === selSize);
+            ex ? ex.q += selQ : cart.push({...tempP, q: selQ, size: selSize});
+            updateCart(); toggle('detail-p');
+        };
+
         window.runSearch = () => {
-            const val = document.getElementById('search-in').value.toLowerCase();
-            const filt = products.filter(p => p.name.toLowerCase().includes(val));
-            document.getElementById('search-results').innerHTML = filt.map(p => drawCard(p)).join('');
+            const v = document.getElementById('search-in').value.toLowerCase();
+            const f = products.filter(p => p.name.toLowerCase().includes(v));
+            document.getElementById('search-results').innerHTML = f.map(p => drawCard(p)).join('');
         };
 
         window.updateMenuCategories = () => {
@@ -230,40 +264,32 @@
                 const count = products.filter(p => p.gen === curGen && p.cat === ck).length;
                 return count > 0 ? `<button onclick="toggle('menu-p'); openViewAll('${ck}')" class="block w-full text-left text-xl font-bold uppercase italic">${cats[ck]}</button>` : '';
             }).join('');
-        }
-
-        window.addCart = (key) => {
-            const p = products.find(x => x.fbKey === key);
-            if(p.status && p.status !== 'available') return;
-            const ex = cart.find(x => x.fbKey === key);
-            ex ? ex.q++ : cart.push({...p, q:1});
-            updateCart();
         };
 
-        window.remCart = (key) => {
-            const idx = cart.findIndex(x => x.fbKey === key);
-            if(cart[idx].q > 1) cart[idx].q--; else cart.splice(idx, 1);
-            updateCart();
-        };
+        window.remCart = (idx) => { cart.splice(idx, 1); updateCart(); };
 
         function updateCart() {
             document.getElementById('count').innerText = cart.reduce((a,b)=>a+b.q,0);
             let sub = cart.reduce((a,b)=>a+(b.price*b.q),0);
             document.getElementById('total-val').innerText = `$${sub + Number(cfg.fee)}`;
-            document.getElementById('cart-items').innerHTML = cart.map(i => `<div class="flex justify-between items-center bg-gray-50 p-4 rounded-2xl"><div><p class="font-bold text-sm">${i.name}</p><p class="text-xs text-blue-600 font-black">${i.q}x - $${i.price}</p></div><button onclick="remCart('${i.fbKey}')" class="text-red-500 font-black text-[10px]">REMOVE</button></div>`).join('');
+            document.getElementById('cart-items').innerHTML = cart.map((i, idx) => `
+                <div class="flex justify-between items-center bg-gray-50 p-4 rounded-2xl">
+                    <div><p class="font-bold text-xs">${i.name} [Size: ${i.size}]</p><p class="text-[10px] text-blue-600 font-black">${i.q}x - $${i.price*i.q}</p></div>
+                    <button onclick="remCart(${idx})" class="text-red-500 font-black text-[10px]">REMOVE</button>
+                </div>`).join('');
         }
 
         window.checkout = () => {
             const ph = document.getElementById('ph').value; const city = document.getElementById('city').value;
             const dist = document.getElementById('dist').value; const bld = document.getElementById('bld').value;
-            if(!ph || !city || cart.length === 0) return alert("Fill Name & City!");
+            if(!ph || !city || cart.length === 0) return alert("Fill form details!");
             const d = new Date();
             const oid = "SNK-" + (d.getMonth()+1) + d.getDate() + d.getHours() + d.getMinutes() + "-" + Math.random().toString(36).substring(2, 5).toUpperCase();
-            const order = { oid, ph, city, dist, bld, pay: document.getElementById('pay').value, total: document.getElementById('total-val').innerText, items: cart.map(i => `${i.q}x ${i.name}`).join(", "), date: d.toLocaleString() };
+            const order = { oid, ph, city, dist, bld, pay: document.getElementById('pay').value, total: document.getElementById('total-val').innerText, items: cart.map(i => `${i.q}x ${i.name} (S: ${i.size})`).join(", "), date: d.toLocaleString() };
             set(push(ref(db, 'sneaks_orders')), order).then(() => {
-                const msg = `ORDER ID: ${oid}\nTOTAL: ${order.total}\nADDRESS: ${order.city}, ${order.dist}, ${order.bld}\nITEMS: ${order.items}`;
+                const msg = `ORDER: ${oid}\nTOTAL: ${order.total}\nADDRESS: ${order.city}, ${order.dist}, ${order.bld}\nITEMS: ${order.items}`;
                 if(order.pay === 'Whish') window.location.href = `https://api.whatsapp.com/send?phone=${cfg.wa.replace(/\D/g, '')}&text=${encodeURIComponent(msg)}`;
-                else alert("Order Confirmed! ID: " + oid);
+                else alert("Order Placed! ID: " + oid);
                 cart = []; updateCart(); toggle('cart-p');
             });
         };
@@ -277,20 +303,20 @@
             }
         };
 
-        window.saveCfg = () => set(ref(db, 'sneaks_cfg'), { wa: document.getElementById('cfg-wa').value, fee: document.getElementById('cfg-fee').value, ig: document.getElementById('cfg-ig').value, tk: document.getElementById('cfg-tk').value }).then(() => alert("Config Saved!"));
+        window.saveCfg = () => set(ref(db, 'sneaks_cfg'), { wa: document.getElementById('cfg-wa').value, fee: document.getElementById('cfg-fee').value, ig: document.getElementById('cfg-ig').value, tk: document.getElementById('cfg-tk').value }).then(() => alert("Saved!"));
         window.addProd = () => {
-            const p = { name: document.getElementById('n-name').value, price: document.getElementById('n-price').value, gen: document.getElementById('n-gen').value, cat: document.getElementById('n-cat').value, img: document.getElementById('n-img').value, status: 'available' };
+            const p = { name: document.getElementById('n-name').value, price: document.getElementById('n-price').value, gen: document.getElementById('n-gen').value, cat: document.getElementById('n-cat').value, img: document.getElementById('n-img').value, sizes: document.getElementById('n-sizes').value, status: 'available' };
             set(push(ref(db, 'sneaks_items')), p).then(() => alert("Added!"));
         };
 
         window.runLogSearch = () => {
-            const val = document.getElementById('log-search').value.toLowerCase();
-            const filt = orders.filter(o => o.oid.toLowerCase().includes(val) || o.ph.includes(val) || o.city.toLowerCase().includes(val));
-            drawLog(filt);
+            const v = document.getElementById('log-search').value.toLowerCase();
+            const f = orders.filter(o => o.oid.toLowerCase().includes(v) || o.ph.includes(v) || o.city.toLowerCase().includes(v));
+            drawLog(f);
         };
 
         function drawAdminInventory() {
-            document.getElementById('admin-inventory').innerHTML = products.map(p => `<div class="flex items-center justify-between p-2 bg-gray-50 rounded-xl border text-[10px] font-bold"><span>${p.name}</span><div class="flex gap-2"><select onchange="updateStatus('${p.fbKey}', this.value)" class="border rounded"><option value="available" ${p.status === 'available' ? 'selected' : ''}>LIVE</option><option value="soldout" ${p.status === 'soldout' ? 'selected' : ''}>SOLD</option><option value="soon" ${p.status === 'soon' ? 'selected' : ''}>SOON</option></select><button onclick="delItem('${p.fbKey}')" class="text-red-500"><i class="fa-solid fa-trash"></i></button></div></div>`).join('');
+            document.getElementById('admin-inventory').innerHTML = products.map(p => `<div class="flex items-center justify-between p-2 bg-gray-50 mb-1 rounded-lg text-[10px] font-bold"><span>${p.name}</span><div class="flex gap-2"><select onchange="updateStatus('${p.fbKey}', this.value)" class="border rounded px-1"><option value="available" ${p.status === 'available' ? 'selected' : ''}>LIVE</option><option value="soldout" ${p.status === 'soldout' ? 'selected' : ''}>SOLD</option><option value="soon" ${p.status === 'soon' ? 'selected' : ''}>SOON</option></select><button onclick="delItem('${p.fbKey}')" class="text-red-500"><i class="fa-solid fa-trash"></i></button></div></div>`).join('');
         }
 
         window.updateStatus = (k, v) => update(ref(db, 'sneaks_items/' + k), { status: v });
@@ -298,13 +324,13 @@
 
         function drawLog(data) {
             document.getElementById('log').innerHTML = data.map(o => `
-                <div class="bg-white p-4 rounded-2xl border-2 shadow-sm" onclick="this.classList.toggle('expanded')">
-                    <div class="flex justify-between font-black text-xs"><span>#${o.oid}</span><span class="text-blue-600">${o.total}</span></div>
+                <div class="bg-white p-4 rounded-2xl border shadow-sm" onclick="this.classList.toggle('expanded')">
+                    <div class="flex justify-between font-black text-[11px]"><span>#${o.oid}</span><span class="text-blue-600">${o.total}</span></div>
                     <div class="details text-[10px] mt-3 border-t pt-3 space-y-2">
                         <p>🛍️ <strong>ITEMS:</strong> ${o.items}</p>
                         <p>📍 <strong>ADDRESS:</strong> ${o.city}, ${o.dist}, ${o.bld}</p>
                         <p>📞 <strong>PHONE:</strong> ${o.ph}</p>
-                        <p>🕒 <strong>DATE:</strong> ${o.date} | 💳 ${o.pay}</p>
+                        <p>🕒 <strong>DATE:</strong> ${o.date} | ${o.pay}</p>
                     </div>
                 </div>`).join('');
         }
